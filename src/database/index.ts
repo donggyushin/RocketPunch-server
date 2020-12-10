@@ -4,7 +4,11 @@ dotenv.config();
 
 const dbUrl = process.env.TEST_DB_CLOUD_MONGO_DB || "";
 
-mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 const db = mongoose.connection;
 

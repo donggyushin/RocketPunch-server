@@ -6,6 +6,7 @@ import UserModel from "../../models/UserModel";
 const FetchUsers = async (req: Request, res: Response) => {
   try {
     const users = await UserModel.find();
+    console.log(users);
     return res.json({
       ok: true,
       users,

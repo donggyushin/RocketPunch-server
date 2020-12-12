@@ -1,21 +1,30 @@
-import { IUser } from "./UserModel";
+import { IUser, IUserDocument } from "./UserModel";
+
 import mongoose from "mongoose";
 
-export interface ICursor extends mongoose.Document {
+interface ICursorDocument extends mongoose.Document, ICursor {}
+
+export interface ICursor {
   user: IUser;
   recentReadMessageId: number;
 }
 
-export interface IMessage extends mongoose.Document {
+interface IMessageDocument extends mongoose.Document, IMessage {}
+
+export interface IMessage {
   messageId: number;
   user: IUser;
   createdAt: Date;
+  text: string;
 }
 
-export interface IChatRoom extends mongoose.Document {
-  users: IUser[];
-  messages: IMessage[];
-  cursors: ICursor[];
+interface IChatRoomDocument extends mongoose.Document, IChatRoom {}
+
+export interface IChatRoom {
+  users: IUserDocument[];
+  messages: IMessageDocument[];
+  cursors: ICursorDocument[];
+  updatedAt: Date;
 }
 
 const chatRoomSchema = new mongoose.Schema({
@@ -38,6 +47,9 @@ const chatRoomSchema = new mongoose.Schema({
         createdAt: {
           type: Date,
         },
+        text: {
+          type: String,
+        },
       },
     ],
   },
@@ -54,8 +66,15 @@ const chatRoomSchema = new mongoose.Schema({
       },
     ],
   },
+  updatedAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-const ChatRoomModel = mongoose.model<IChatRoom>("ChatRoom", chatRoomSchema);
+const ChatRoomModel = mongoose.model<IChatRoomDocument>(
+  "ChatRoom",
+  chatRoomSchema
+);
 
 export default ChatRoomModel;

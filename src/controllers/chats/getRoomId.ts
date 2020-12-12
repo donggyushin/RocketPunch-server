@@ -3,6 +3,7 @@ import { StatusCodes, getReasonPhrase } from "http-status-codes";
 
 import ChatRoomModel from "../../models/ChatRoomModel";
 import UserModel from "../../models/UserModel";
+import compareTwoArray from "../../utils/compareTwoArrays";
 
 const GetRoomId = async (
   req: Request,
@@ -40,7 +41,8 @@ const GetRoomId = async (
         return user.userId;
       });
       userIdsToCompare = userIdsToCompare.sort();
-      if (sortedUserIds === userIdsToCompare) {
+
+      if (compareTwoArray(userIdsToCompare, sortedUserIds)) {
         return true;
       } else {
         return false;

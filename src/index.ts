@@ -1,4 +1,5 @@
 import "./database";
+import "./socketServer/chatSocket";
 
 import App from "./app";
 

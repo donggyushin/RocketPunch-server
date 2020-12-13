@@ -1,3 +1,4 @@
+import FetchChatRoom from "./apis/fetchChatRoom";
 import FetchChatRooms from "./apis/fetchChatRooms";
 import JoinRoomList from "./actions/joinRoomList";
 import NewMessage from "./actions/newMessage";
@@ -5,6 +6,7 @@ import { Socket } from "socket.io";
 import UpdateRoom from "./actions/updateRoom";
 import UserJoinedRoom from "./actions/userJoinedRoom";
 import UserLeaveRoom from "./actions/userLeaveRoom";
+import UserReadMessage from "./actions/userReadMessage";
 
 const app = require("express")();
 const server = require("http").createServer(app);
@@ -41,6 +43,12 @@ io.on("connection", (socket: Socket) => {
   socket.on("new_message", (data) => {
     NewMessage(data, chats, sockets, data);
     // UpdateRoom(data, sockets);
+  });
+
+  socket.on("user_read_message", (data) => {
+    // 필요한 값?
+    const { roomId, userId, messageId } = data;
+    UserReadMessage(roomId, userId, messageId, chats);
   });
 
   socket.on("disconnect", () => {

@@ -39,8 +39,8 @@ io.on("connection", (socket: Socket) => {
   });
 
   socket.on("new_message", (data) => {
-    NewMessage(data, chats);
-    UpdateRoom(data, sockets);
+    NewMessage(data, chats, sockets, data);
+    // UpdateRoom(data, sockets);
   });
 
   socket.on("disconnect", () => {

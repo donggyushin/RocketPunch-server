@@ -13,6 +13,10 @@ const FetchChatRooms = async (userId: string) => {
       return result;
     });
 
+    // 여기서 updatedAt 을 기준으로 재정렬하고 보내주자.
+    filteredChatRooms.sort((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    });
     return {
       ok: true,
       chats: filteredChatRooms,

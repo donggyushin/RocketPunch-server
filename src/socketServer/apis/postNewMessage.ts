@@ -50,6 +50,7 @@ const PostNewMessage = async (
 
     await chatRoom.updateOne({
       messages,
+      updatedAt: new Date(),
     });
 
     return {

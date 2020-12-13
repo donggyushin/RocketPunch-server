@@ -3,7 +3,6 @@ import ReturnUserIdsByRoomId from "../apis/returnUserIdsByRoomId";
 import { Socket } from "socket.io";
 
 const UpdateRoom = (data: any, sockets: Socket[]) => {
-  console.log("update room 호출");
   ReturnUserIdsByRoomId(data.roomId).then((data) => {
     if (data.userIds) {
       const userIds = data.userIds;

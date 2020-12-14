@@ -11,8 +11,6 @@ const UpdateRoom = (data: any, sockets: Socket[]) => {
         let result = false;
         userIds.map((userId) => {
           // @ts-ignore
-          console.log(socket.userId);
-          // @ts-ignore
           if (userId == socket.userId) {
             result = true;
           }

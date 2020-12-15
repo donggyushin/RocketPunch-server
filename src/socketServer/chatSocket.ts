@@ -1,4 +1,3 @@
-import FetchChatRoom from "./apis/fetchChatRoom";
 import FetchChatRooms from "./apis/fetchChatRooms";
 import JoinRoomList from "./actions/joinRoomList";
 import NewMessage from "./actions/newMessage";

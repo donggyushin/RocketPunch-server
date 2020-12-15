@@ -1,12 +1,15 @@
 import FetchChatRoom from "../apis/fetchChatRoom";
 import FetchSocketsByRoomId from "./fetchSocketsByRoomId";
 import { IChat } from "../chatSocket";
+import UpdateRoom from "./updateRoom";
+import { Socket } from "socket.io";
 
 const UserReadMessage = (
   roomId: string,
   userId: string,
   messageId: string,
-  chats: IChat[]
+  chats: IChat[],
+  sockets: Socket[]
 ) => {
   FetchChatRoom(roomId).then(async (data) => {
     const { ok, chatRoom } = data;
@@ -52,6 +55,8 @@ const UserReadMessage = (
         await chatRoom!.updateOne({
           cursors,
         });
+
+        UpdateRoom({ roomId }, sockets);
 
         // 업데이트 되어진 커서들을 구했기 때문에, 해당 roomId를 가지고 있는
         // chat안에 들어있는 모든 소켓들을 통해서 emit 해준다.

@@ -41,7 +41,7 @@ io.on("connection", (socket: Socket) => {
   socket.on("user_read_message", (data) => {
     // 필요한 값?
     const { roomId, userId, messageId } = data;
-    UserReadMessage(roomId, userId, messageId, chats);
+    UserReadMessage(roomId, userId, messageId, chats, sockets);
   });
 
   socket.on("disconnect", () => {

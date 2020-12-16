@@ -10,6 +10,7 @@ const LoginUser = async (req: Request, res: Response) => {
     pw?: string;
   }
   const { id, pw } = req.body as Body;
+  console.log("here");
   if (!id || !pw) {
     return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
       ok: false,
@@ -35,7 +36,9 @@ const LoginUser = async (req: Request, res: Response) => {
 
     if (user.userPw === pw) {
       // token 생성하고 token 과 함께 보낸다.
+
       const token = JsonWebTokenUtil.generateToken(user._id);
+
       return res.json({
         ok: true,
         token,

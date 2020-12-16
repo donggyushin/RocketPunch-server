@@ -15,6 +15,8 @@ const GetRoomId = async (
 
   const { userIdsString } = req.query as Query;
 
+  console.log("userIdsString" + userIdsString);
+
   if (!userIdsString) {
     return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
       ok: false,
